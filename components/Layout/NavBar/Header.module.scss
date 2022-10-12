@@ -1,14 +1,15 @@
 .wrapper {
-    height: 80px;
+    height: 110px;
     background-color: #2d2a27;
     font-size: 14px;
 }
 .inner {
     height: 100%;
     display: flex;
-    // justify-content: space-between;
+    // justify-content: space-between
     width: 1230px;
     margin: 0 auto;
+    padding: 0 9px;
 }
 .wrapper_logo {
     align-self: center;

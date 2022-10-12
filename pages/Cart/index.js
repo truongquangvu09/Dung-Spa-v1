@@ -1,7 +1,11 @@
 import React from 'react';
-
+import MainLayoutShop from './../../components/MainLayoutShop/index';
 function CartPage() {
-    return <div>cart o day</div>;
+    return (
+        <div>
+            <MainLayoutShop />
+        </div>
+    );
 }
 
 export default CartPage;
