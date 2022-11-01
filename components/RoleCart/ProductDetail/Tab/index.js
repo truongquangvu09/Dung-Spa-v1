@@ -66,13 +66,13 @@ function BasicTabs() {
                     <div className={cx('review-form-wrapper')}>
                         <div className={cx('review-form')}>
                             <div className={cx('review-form-inner')}>
-                                <h3 className={cx('reply-title')}>Hãy là người đầu tiên đánh giá {item.name}</h3>
+                                <h3 className={cx('reply-title')}>Hãy là người đầu tiên đánh giá " {item.name} "</h3>
                                 <form action="" className={cx('comment-form')}>
                                     <div className={cx('comment-rating')}>
                                         <label htmlFor="">Đánh giá của bạn</label>
 
                                         <p>
-                                            <span className={cx('start')}>
+                                            <span className={cx('stars')}>
                                                 <a href="#" className={cx('star-1')}>
                                                     <FontAwesomeIcon icon={faStar} />
                                                 </a>
@@ -101,6 +101,42 @@ function BasicTabs() {
                                             </span>
                                         </p>
                                     </div>
+                                    <p className={cx('comment-form-comment')}>
+                                        <label htmlFor="" className={cx('comment')}>
+                                            Nhận xét của bạn *
+                                        </label>
+                                        <textarea name="comment" id="comment" cols="45" rows="8"></textarea>
+                                    </p>
+                                    <div className={cx('info')}>
+                                        <p className={cx('comment-form-author', 'author')}>
+                                            <label htmlFor="" className={cx('comment')}>
+                                                Tên *
+                                            </label>
+                                            <input type="text" />
+                                        </p>
+                                        <p className={cx('comment-form-author')}>
+                                            <label htmlFor="" className={cx('comment')}>
+                                                Email *
+                                            </label>
+                                            <input type="email" />
+                                        </p>
+                                    </div>
+                                    <p className={cx('comment-form-cookies')}>
+                                        <input id="consent" type="checkbox" value="yes" />
+                                        <label htmlFor="consent">
+                                            Lưu tên của tôi, email, và trang web trong trình duyệt này cho lần bình luận
+                                            kế tiếp của tôi.
+                                        </label>
+                                    </p>
+                                    <p className={cx('form-submit')}>
+                                        <input
+                                            name="submit"
+                                            type="submit"
+                                            id="submit"
+                                            class="submit"
+                                            value="Gửi đi"
+                                        ></input>
+                                    </p>
                                 </form>
                             </div>
                         </div>

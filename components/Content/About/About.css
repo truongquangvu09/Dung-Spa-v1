@@ -1,0 +1,68 @@
+.wrapper {
+    width: 100%;
+    /* height: 1500px; */
+}
+.border-1 {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    padding: 0 20%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.is_divider {
+    max-width: 880px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.view_content_border-1 {
+    text-align: center;
+}
+.border-2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: gray; */
+}
+.img_tt {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.border-3 {
+    width: 100%;
+    min-height: 400px;
+    text-align: center;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 100px; */
+}
+.flex-wrap_d-flex {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.border-4 {
+    width: 500px;
+    background-color: gray;
+}
+.card {
+    width: 250px;
+    height: 250px;
+}
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.txt-nhanxet-all {
+    color: white;
+}
+.border-5 {
+    height: 400px;
+    width: 100%;
+    background: url('https://thegirlfrompanama.com/wp-content/uploads/2019/04/pam-hetlinger-Loreal-Tanning-Towelettes-11.jpg');
+}

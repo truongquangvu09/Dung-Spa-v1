@@ -130,3 +130,77 @@ export const productDetail = [
             'Fermentum posuere urna nec tincidunt praesent semper. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Pretium quam vulputate dignissim suspendisse.Fermentum posuere urna nec tincidunt praesent semper. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Pretium quam vulputate dignissim suspendisse.Fermentum posuere urna nec tincidunt praesent semper. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Pretium quam vulputate dignissim suspendisse.Fermentum posuere urna nec tincidunt praesent semper. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Pretium quam vulputate dignissim suspendisse.',
     },
 ];
+export const loginUser = [
+    {
+        email: 'vudepzai@gmai.com',
+        password: 'Vu@1234567',
+    },
+];
+export const newListContent = [
+    {
+        id: 1,
+        img: 'http://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2019/12/5-300x200.jpg',
+        title: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        blog: 'what is ? Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        date: '24',
+        month: '12',
+    },
+    {
+        id: 2,
+        img: 'http://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2019/12/5-2-300x200.jpg',
+        title: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        blog: 'what is ? Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        date: '13',
+        month: '6',
+    },
+    {
+        id: 3,
+        img: 'http://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2019/12/4-300x200.jpg',
+        title: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        blog: 'what is ? Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        date: '20',
+        month: '1',
+    },
+    {
+        id: 4,
+        img: 'http://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2019/12/4-1-300x200.jpg',
+        title: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        blog: 'what is ? Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        date: '17',
+        month: '3',
+    },
+    {
+        id: 5,
+        img: 'http://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2019/12/3-1-300x200.jpg',
+        title: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        blog: 'what is ? Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        date: '29',
+        month: '5',
+    },
+    {
+        id: 6,
+        img: 'http://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2019/12/2-300x200.jpg',
+        title: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        blog: 'what is ? Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit',
+        date: '10',
+        month: '2',
+    },
+];
+export const listItemMenuHomePage = [
+    {
+        img: 'https://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2020/05/7.jpg',
+        nameItem: 'MASSAGE',
+    },
+    {
+        img: 'https://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2020/05/7.jpg',
+        nameItem: 'TRỊ MỤN',
+    },
+    {
+        img: 'https://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2020/05/7.jpg',
+        nameItem: 'TRỊ NÁM',
+    },
+    {
+        img: 'https://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2020/05/7.jpg',
+        nameItem: 'TẨY DA CHẾT',
+    },
+];

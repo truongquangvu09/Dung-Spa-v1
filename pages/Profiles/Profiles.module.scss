@@ -1,0 +1,19 @@
+.wrapper {
+    width: 1230px;
+    margin: 30px auto;
+}
+.inner-profile {
+    padding: 0 15px;
+    h3 {
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+
+    th {
+        text-align: left;
+        font-weight: 500;
+        padding: 15px 0;
+        max-width: 250px;
+        width: 250px;
+    }
+}

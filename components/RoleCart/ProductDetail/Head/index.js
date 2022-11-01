@@ -2,6 +2,9 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './Head.module.scss';
 
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { productDetail } from '../../../../data/data';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +21,11 @@ import {
 const cx = classNames.bind(styles);
 
 function HeadProductDetail() {
+    const { id } = useParams();
+    const [product, setProduct] = useState([]);
+
+    useEffect(() => {});
+
     return (
         <div className={cx('wrapper')}>
             {productDetail.map((item, index) => {

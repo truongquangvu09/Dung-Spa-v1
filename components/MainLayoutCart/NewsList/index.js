@@ -15,7 +15,7 @@ function NewsList() {
                             <div className={cx('post-image')}>
                                 <img src={news.img} alt="" />
                             </div>
-                            <Link to="/Shop/New_Detail">
+                            <Link to="/News/New_DetailContent">
                                 <a className={cx('word-wrap')} href="#">
                                     {news.content}
                                 </a>

@@ -9,14 +9,11 @@ function Footer() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('logo')}>
-                <img
-                    src=" https://mauweb.monamedia.net/luxuryspa/wp-content/uploads/2020/05/logopsa121212.png"
-                    alt="logo"
-                />
+                <img src={require('../../../assets/img/LogoDungSpa (1) (3).png')} alt="logo" />
             </div>
             <div className={cx('contact')}>
-                <p>Dung Spa, k4-/44 Nguyễn Huy Tưởng, Da Nang</p>
-                <a href="mailto:truongquangvuu09@gmail.com">dungSpabeauty@gmail.com</a>
+                <p>Dung Spa, K40/44 Nguyễn Huy Tưởng, Da Nang</p>
+                <a href="mailto:dungspabeauty1982@gmail.com">dungSpabeauty@gmail.com</a>
                 <br />
 
                 <a href="tel: 0783442955">0783442955</a>

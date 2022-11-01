@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Footer from './components/Layout/Footer';
 import Navbar from './components/Layout/NavBar';
 import CartPage from './pages/Cart';
 import ContactPage from './pages/Contact';
@@ -11,25 +10,48 @@ import BookingPage from './pages/Booking';
 import ProductDetail from './components/RoleCart/ProductDetail';
 import NewDetail from './components/RoleCart/NewsDetail/index';
 import ProductListDetail from './components/RoleCart/ProductListDetail/index';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword/index';
+import ChangePassword from './pages/ChangePassword/index';
+import NewsPage from './pages/News/index';
+import NewsListContent from './components/MainLayoutNews/NewsList/index';
+import NewsDetailContent from './components/MainLayoutNews/NewsList/NewsDetail/index';
+import ViewPayCart from './components/MainLayoutShop/ViewPayCart';
+import Profiles from './pages/Profiles';
+import Admin from './pages/Admin/index';
 function App() {
     return (
         <div>
             <Router>
+                {/* <Navbar /> */}
                 <Routes>
                     <Route path="" element={<Navbar />}>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/Introduce" element={<AboutPage />} />
                         <Route path="/Shop" element={<Shoppage />}>
-                            <Route path="" element=<ProductListDetail />></Route>
-
-                            <Route path="Product_Detail" element=<ProductDetail /> />
-                            <Route path="New_Detail" element=<NewDetail />></Route>
+                            <Route path="" element={<ProductListDetail />} />
+                            <Route path="Product_Detail" element={<ProductDetail />} />
+                            <Route path="New_Detail" element={<NewDetail />} />
                         </Route>
                         <Route path="/Services" element={<ServicesPage />} />
                         <Route path="/Contact" element={<ContactPage />} />
                         <Route path="/Booking" element={<BookingPage />} />
                         <Route path="/Cart" element={<CartPage />} />
+                        <Route path="ViewPayCart" element={<ViewPayCart />} />
+                        <Route path="/News" element={<NewsPage />}>
+                            <Route path="" element={<NewsListContent />} />
+                            <Route path="New_DetailContent" element={<NewsDetailContent />} />
+                        </Route>
+                        <Route path="/UserProfile" element={<Profiles />} />
+                        <Route path="/Admin" element={<Admin />} />
                     </Route>
+                </Routes>
+                <Routes>
+                    <Route path="/Login" element={<Login />} />
+                    <Route path="/Register" element={<Register />} />
+                    <Route path="/ForgotPassword" element={<ForgotPassword />} />
+                    <Route path="/ChangePassword" element={<ChangePassword />} />
                 </Routes>
             </Router>
         </div>

@@ -1,7 +1,12 @@
 import React from 'react';
+import ContentServicePage from '../../components/Content/Service';
 
 function ServicesPage() {
-    return <div>ServicesPage</div>;
+    return (
+        <div>
+            <ContentServicePage />
+        </div>
+    );
 }
 
 export default ServicesPage;

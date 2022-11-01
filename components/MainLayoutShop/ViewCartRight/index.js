@@ -4,6 +4,7 @@ import styles from './ViewCartRight.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMarker, faTag } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 function ViewCartRight() {
     return (
@@ -42,9 +43,11 @@ function ViewCartRight() {
                         </tbody>
                     </table>
                     <div className={cx('checkout')}>
-                        <a href="" className={cx('checkout-button')}>
-                            Tiến hành thanh toán
-                        </a>
+                        <Link to="/ViewPayCart">
+                            <a href="" className={cx('checkout-button')}>
+                                Tiến hành thanh toán
+                            </a>
+                        </Link>
                     </div>
                 </div>
                 <form action="" className={cx('check-discount')}>

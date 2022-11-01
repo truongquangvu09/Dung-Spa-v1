@@ -3,6 +3,10 @@ import styles from './MainLayoutCart.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { Wrapper as PopperWrapper } from '../Layout/Popper';
+import Tippy from '@tippyjs/react/headless';
+// import 'tippy.js/dist/tippy.css';
+import { useState, useEffect } from 'react';
 import ProductList from './ProductList';
 import NewsList from './NewsList';
 import { Link, Outlet } from 'react-router-dom';
@@ -10,6 +14,18 @@ import { Link, Outlet } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function MainLayoutCart() {
+    const [searchResult, SetSearchResult] = useState([]);
+    const [showResult, SetShowResult] = useState([true]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            SetSearchResult([1, 2, 3]);
+        }, 0);
+    }, []);
+
+    const handleHideResult = () => {
+        SetShowResult(false);
+    };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -35,12 +51,30 @@ function MainLayoutCart() {
                 </div>
                 <div className={cx('category')}>
                     <div className={cx('sidebar', 'rol')}>
-                        <aside className={cx('search', 'widget')}>
-                            <input type="search" placeholder="Tìm kiếm..." />
-                            <button type="submit">
-                                <FontAwesomeIcon className={cx('icon-search')} icon={faMagnifyingGlass} />
-                            </button>
-                        </aside>
+                        <Tippy
+                            placement="bottom-start"
+                            interactive="true"
+                            visible={showResult && searchResult.length > 0}
+                            render={(attrs) => (
+                                <PopperWrapper>
+                                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                                        <h3>Sản phẩm</h3>
+                                        <ProductList />
+                                        <h3>Tin tức</h3>
+                                        {/* <NewsList /> */}
+                                    </div>
+                                </PopperWrapper>
+                            )}
+                            onClickOutside={handleHideResult}
+                        >
+                            <aside className={cx('search', 'widget')}>
+                                <input type="search" placeholder="Tìm kiếm..." onFocus={() => SetShowResult(true)} />
+
+                                <button type="submit">
+                                    <FontAwesomeIcon className={cx('icon-search')} icon={faMagnifyingGlass} />
+                                </button>
+                            </aside>
+                        </Tippy>
                         <aside className={cx('product-portfolio', 'widget', 'widget-bd')}>
                             <div className={cx('widget-title')}>Danh mục sản phẩm</div>
                             <div className={cx('is-divider')}></div>
