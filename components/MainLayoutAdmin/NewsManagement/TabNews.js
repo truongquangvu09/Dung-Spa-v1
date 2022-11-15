@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DataTableNews from './index';
+import AddNews from './addNews';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -47,7 +48,7 @@ function TabsNews() {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: 1230 }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab style={{ fontSize: 18 }} label="View" {...a11yProps(0)} />
@@ -58,7 +59,7 @@ function TabsNews() {
                 <DataTableNews />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                <AddNews />
             </TabPanel>
         </Box>
     );

@@ -22,6 +22,7 @@ function AddProducts() {
     const [productDescription, setProductDescription] = useState('');
     const [productId, setProductID] = useState('');
     const [productDescriptionDetail, setProductDescriptionDetail] = useState('');
+    const [productTime, setProductTime] = useState(new Date());
 
     const [imgError, setImgError] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
@@ -56,6 +57,7 @@ function AddProducts() {
                     productDescription,
                     productDescriptionDetail,
                     productId,
+                    productTime,
                 }).then(() => {
                     setSuccessMsg('Thêm thành công sản phẩm mới');
                     setUploadError('');

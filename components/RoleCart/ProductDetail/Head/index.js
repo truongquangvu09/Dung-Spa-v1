@@ -5,17 +5,21 @@ import styles from './Head.module.scss';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { productDetail } from '../../../../data/data';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { db } from '../../../../FireBase/FireBase';
+import { doc, getDoc } from 'firebase/firestore';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
     faFacebook,
     faLinkedin,
     faPinterest,
     faSquareTumblr,
     faSquareTwitter,
-    faTumblr,
-    faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 
 const cx = classNames.bind(styles);
@@ -23,122 +27,160 @@ const cx = classNames.bind(styles);
 function HeadProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
+    const [quantity, setQuantity] = useState(1);
+    const handleAdd = (e) => {
+        setQuantity(quantity + 1);
+    };
 
-    useEffect(() => {});
+    const handleRemove = (e) => {
+        if (quantity <= 1) {
+            setQuantity(1);
+        } else {
+            setQuantity(quantity - 1);
+        }
+    };
+
+    const handleBuy = (e) => {
+        toast.success('Thêm vào giỏ hàng thành công');
+    };
+
+    function GetCurrentProducts() {
+        useEffect(() => {
+            const getProducts = async () => {
+                const docRef = doc(db, `products`, id);
+                const docSnap = await getDoc(docRef);
+                setProduct(docSnap.data());
+            };
+            getProducts();
+        }, []);
+        return product;
+    }
+
+    GetCurrentProducts();
 
     return (
-        <div className={cx('wrapper')}>
-            {productDetail.map((item, index) => {
-                let CircleDiscount = () => {
-                    if (item.price_discount !== '') {
-                        return (
-                            <div className={cx('badge')}>
-                                <div className={cx('badge-circle')}>
-                                    <div className={cx('badge-inner')}>
-                                        <span class={cx('onsale')}>-{item.price_discount}%</span>
+        <>
+            <ToastContainer />
+            <div className={cx('wrapper')}>
+                <div className={cx('inner')}>
+                    <div className={cx('is-left', 'col')}>
+                        <div className={cx('product-image')}>
+                            {product.productDiscount ? (
+                                <div className={cx('badge')}>
+                                    <div className={cx('badge-circle')}>
+                                        <div className={cx('badge-inner')}>
+                                            <span class={cx('onsale')}>-{product.productDiscount}%</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    } else {
-                        return '';
-                    }
-                };
-                let Discount = () => {
-                    if (item.price_discount !== '') {
-                        return (
+                            ) : (
+                                <div></div>
+                            )}
+
+                            <figure>
+                                <img id="myImg" src={product.productImg} alt={product.name} />
+                            </figure>
+                        </div>
+                    </div>
+                    <div className={cx('is-right', 'col')}>
+                        <nav className={cx('breadcrumb')}>
+                            <Link style={{ textDecoration: 'none' }} to="/">
+                                {' '}
+                                <a href="#">Trang chủ</a>
+                            </Link>
+                            <span className={cx('divider')}>/</span>
+                            <Link style={{ textDecoration: 'none' }} to="/Shop">
+                                {' '}
+                                <a href="#">Đặc trưng</a>
+                            </Link>
+                        </nav>
+                        <h1 className={cx('product-title')}>{product.productName}</h1>
+                        <div className={cx('is-divider')}></div>
+                        <div className={cx('price-wrapper')}>{}</div>
+                        {product.productDiscount ? (
                             <div className={cx('price-wrapper')}>
                                 <span className={cx('price')}>
                                     <del>
-                                        <span className={cx('amount')}>₫{item.price.toLocaleString()}</span>
+                                        <span className={cx('amount')}>
+                                            ₫{Number(product.productPrice).toLocaleString()}
+                                        </span>
                                     </del>
                                     <ins>
                                         <span className={cx('amount')}>
-                                            ₫{(item.price * (1 - item.price_discount / 100)).toLocaleString()}
+                                            ₫
+                                            {Number(
+                                                product.productPrice * (1 - product.productDiscount / 100),
+                                            ).toLocaleString()}
                                         </span>
                                     </ins>
                                 </span>
                             </div>
-                        );
-                    } else {
-                        return (
+                        ) : (
                             <div className={cx('price-wrapper')}>
                                 <span className={cx('price')}>
                                     <ins>
-                                        <span className={cx('amount')}>₫{item.price.toLocaleString()}</span>
+                                        <span className={cx('amount')}>
+                                            ₫{Number(product.productPrice).toLocaleString()}
+                                        </span>
                                     </ins>
                                 </span>
                             </div>
-                        );
-                    }
-                };
-                return (
-                    <div className={cx('inner')}>
-                        <div className={cx('is-left', 'col')}>
-                            <div className={cx('product-image')}>
-                                {CircleDiscount()}
-
-                                <figure>
-                                    <img id="myImg" src={item.img} alt={item.name} />
-                                </figure>
-                            </div>
+                        )}
+                        <div className={cx('description')}>
+                            <p>{product.productDescription}</p>
                         </div>
-                        <div className={cx('is-right', 'col')}>
-                            <nav className={cx('breadcrumb')}>
-                                <Link style={{ textDecoration: 'none' }} to="/">
-                                    {' '}
-                                    <a href="#">Trang chủ</a>
+                        <form className={cx('cart')} action="">
+                            <div>
+                                <input
+                                    type="button"
+                                    value="-"
+                                    onClick={handleRemove}
+                                    className={cx('minus', 'button', 'is-form')}
+                                />
+                                <input
+                                    type="number"
+                                    className={cx('input-text')}
+                                    inputMode="numeric"
+                                    value={quantity}
+                                />
+                                <input
+                                    type="button"
+                                    onClick={handleAdd}
+                                    value="+"
+                                    className={cx('plus', 'button', 'is-form')}
+                                />
+                            </div>
+                            <button type="submit" onClick={handleBuy} className={cx('add-to-cart', 'button')}>
+                                Mua hàng
+                            </button>
+                            {/* <input type="button" onClick={handleBuy} className={cx('button')} value="mua" /> */}
+                        </form>
+                        <div className={cx('product-meta')}>
+                            <span class="sku_wrapper">
+                                Mã: <span class="sku">{product.productId}</span>
+                            </span>
+                            <span class="posted_in">
+                                Danh mục:{' '}
+                                <Link to="/Shop">
+                                    <a href="#">ĐẶC TRƯNG</a>
                                 </Link>
-                                <span className={cx('divider')}>/</span>
-                                <Link style={{ textDecoration: 'none' }} to="/Shop">
-                                    {' '}
-                                    <a href="#">Đặc trưng</a>
+                                ,{' '}
+                                <Link to="/Services">
+                                    <a href="#">DỊCH VỤ SPA</a>
                                 </Link>
-                            </nav>
-                            <h1 className={cx('product-title')}>{item.name}</h1>
-                            <div className={cx('is-divider')}></div>
-                            {/* <div className={cx('price-wrapper')}>{}</div> */}
-                            {Discount()}
-                            <div className={cx('description')}>
-                                <p>{item.desc}</p>
-                            </div>
-                            <form className={cx('cart')} action="">
-                                <div>
-                                    <input type="button" value="-" className={cx('minus', 'button', 'is-form')} />
-                                    <input type="number" className={cx('input-text')} inputMode="numeric" value="1" />
-                                    <input type="button" value="+" className={cx('plus', 'button', 'is-form')} />
-                                </div>
-                                <button type="submit" className={cx('add-to-cart', 'button')}>
-                                    Mua hàng
-                                </button>
-                            </form>
-                            <div className={cx('product-meta')}>
-                                <span class="sku_wrapper">
-                                    Mã: <span class="sku">MA-LD-01</span>
-                                </span>
-                                <span class="posted_in">
-                                    Danh mục:{' '}
-                                    <Link to="/Shop">
-                                        <a href="#">ĐẶC TRƯNG</a>
-                                    </Link>
-                                    ,{' '}
-                                    <Link to="/Services">
-                                        <a href="#">DỊCH VỤ SPA</a>
-                                    </Link>
-                                </span>
-                            </div>
-                            <div className={cx('social')}>
-                                <FontAwesomeIcon className={cx('icon')} icon={faFacebook} />
-                                <FontAwesomeIcon className={cx('icon')} icon={faSquareTwitter} />
-                                <FontAwesomeIcon className={cx('icon')} icon={faPinterest} />
-                                <FontAwesomeIcon className={cx('icon')} icon={faLinkedin} />
-                                <FontAwesomeIcon className={cx('icon')} icon={faSquareTumblr} />
-                            </div>
+                            </span>
+                        </div>
+                        <div className={cx('social')}>
+                            <FontAwesomeIcon className={cx('icon')} icon={faFacebook} />
+                            <FontAwesomeIcon className={cx('icon')} icon={faSquareTwitter} />
+                            <FontAwesomeIcon className={cx('icon')} icon={faPinterest} />
+                            <FontAwesomeIcon className={cx('icon')} icon={faLinkedin} />
+                            <FontAwesomeIcon className={cx('icon')} icon={faSquareTumblr} />
                         </div>
                     </div>
-                );
-            })}
-        </div>
+                </div>
+            </div>
+        </>
     );
 }
 

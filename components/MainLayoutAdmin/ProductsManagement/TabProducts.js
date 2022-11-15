@@ -48,7 +48,7 @@ function TabProducts() {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: 1230 }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab style={{ fontSize: 18 }} label="View" {...a11yProps(0)} />

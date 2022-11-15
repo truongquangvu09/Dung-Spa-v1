@@ -42,13 +42,13 @@ function ViewCartRight() {
                             </tr>
                         </tbody>
                     </table>
-                    <div className={cx('checkout')}>
-                        <Link to="/ViewPayCart">
+                    <Link to="/ViewPayCart">
+                        <div className={cx('checkout')}>
                             <a href="" className={cx('checkout-button')}>
                                 Tiến hành thanh toán
                             </a>
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
                 </div>
                 <form action="" className={cx('check-discount')}>
                     <div className={cx('discount')}>

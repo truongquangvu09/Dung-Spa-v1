@@ -59,3 +59,7 @@ ul {
 .price-box {
     display: flex;
 }
+.product-list {
+    max-height: 400px;
+    overflow: hidden;
+}

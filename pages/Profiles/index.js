@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Profiles.module.scss';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { auth, db } from '../../FireBase/FireBase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -64,8 +64,17 @@ function Profiles() {
                             <tr>
                                 <th>Email :</th>
                             </tr>
+
                             <tr>
                                 <td>{loggedUser[0].email}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {' '}
+                                    <Link to="/ChangePassword">
+                                        <button className={cx('button')}>Thay đổi mật khẩu</button>
+                                    </Link>
+                                </th>
                             </tr>
                         </tfoot>
                     </table>

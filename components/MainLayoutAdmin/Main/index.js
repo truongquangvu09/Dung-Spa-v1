@@ -4,6 +4,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import StoreIcon from '@mui/icons-material/Store';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 import classNames from 'classnames/bind';
 import styles from './Main.module.scss';
@@ -12,6 +16,8 @@ import DataTableNews from '../NewsManagement';
 import DataTableUsers from '../UsersManagement';
 import TabsNews from './../NewsManagement/TabNews';
 import TabProducts from './../ProductsManagement/TabProducts';
+import SalesManagement from './../SalesManagement/index';
+import Datatable from './../../../admin/components/datatable/Datatable';
 const cx = classNames.bind(styles);
 
 function TabPanel(props) {
@@ -65,20 +71,58 @@ function VerticalTabs() {
                 value={value}
                 onChange={handleChange}
                 aria-label="Vertical tabs example"
-                sx={{ borderRight: 1, borderColor: 'divider' }}
+                sx={{ borderRight: 1, borderColor: 'divider', width: 400 }}
             >
-                <Tab className={cx('tab')} label="Quản lý sản phẩm" {...a11yProps(0)} />
-                <Tab className={cx('tab')} label="Quản lý tin tức" {...a11yProps(1)} />
-                <Tab className={cx('tab')} label="Quản lý tài khoản" {...a11yProps(2)} />
+                <Tab
+                    className={cx('tab')}
+                    sx={{ display: 'inline', textAlign: 'start' }}
+                    icon={<MonetizationOnIcon className={cx('icon')} sx={{ fontSize: 20 }} />}
+                    label="Sales"
+                    {...a11yProps(0)}
+                />
+                <Tab
+                    className={cx('tab')}
+                    sx={{ display: 'inline', textAlign: 'start' }}
+                    icon={<StoreIcon className={cx('icon')} sx={{ fontSize: 20 }} />}
+                    label=" Quản lý sản phẩm"
+                    {...a11yProps(1)}
+                />
+                <Tab
+                    className={cx('tab')}
+                    sx={{ display: 'inline', textAlign: 'start' }}
+                    icon={<NewspaperIcon className={cx('icon')} sx={{ fontSize: 20 }} />}
+                    label="Quản lý tin tức"
+                    {...a11yProps(2)}
+                />
+                <Tab
+                    className={cx('tab')}
+                    sx={{ display: 'inline', textAlign: 'start' }}
+                    icon={<PersonOutlineIcon className={cx('icon')} sx={{ fontSize: 20 }} />}
+                    label="Quản lý tài khoản"
+                    {...a11yProps(3)}
+                />
+                <Tab
+                    className={cx('tab')}
+                    sx={{ display: 'inline', textAlign: 'start' }}
+                    icon={<PersonOutlineIcon className={cx('icon')} sx={{ fontSize: 20 }} />}
+                    label="Test"
+                    {...a11yProps(4)}
+                />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <TabProducts />
+                <SalesManagement />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TabsNews />
+                <TabProducts />
             </TabPanel>
             <TabPanel value={value} index={2}>
+                <TabsNews />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
                 <DataTableUsers />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                <Datatable />
             </TabPanel>
         </Box>
     );

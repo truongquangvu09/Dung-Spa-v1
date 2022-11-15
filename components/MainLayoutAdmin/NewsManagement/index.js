@@ -1,84 +1,121 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
+import { Avatar } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import UploadIcon from '@mui/icons-material/Upload';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
+import EditIcon from '@mui/icons-material/Edit';
+import { red } from '@mui/material/colors';
 
-import { auth, db } from '../../../FireBase/FireBase';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../../FireBase/FireBase';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 function DataTableNews() {
-    function GetCurrentUser() {
-        const [user, setUser] = useState('');
-        const usersCollectionRef = collection(db, 'users');
+    // const [news, setNews] = useState([]);
 
-        useEffect(() => {
-            auth.onAuthStateChanged((userLogged) => {
-                if (userLogged) {
-                    const getUSers = async () => {
-                        const q = query(collection(db, 'users'), where('uid', '==', userLogged.uid));
-                        const data = await getDocs(q);
-                        setUser(
-                            data.docs.map((doc) => ({
-                                ...doc.data(),
-                                id: doc.id,
-                            })),
-                        );
-                    };
-                    getUSers();
-                } else {
-                    setUser(null);
-                }
-            });
-        }, []);
-        return user;
-    }
-    const loggedUser = GetCurrentUser();
+    // useEffect(() => {
+    //     const getNew = () => {
+    //         const newsList = [];
+    //         const path = 'news';
+    //         getDocs(collection(db, path))
+    //             .then((QuerySnapshot) => {
+    //                 QuerySnapshot.forEach((doc) => {
+    //                     newsList.push({
+    //                         id: doc.data().newName,
+    //                         img: doc.data().newImg,
+    //                         time: doc.data().newTime,
+    //                         description: doc.data().newDescription,
+    //                         description_detail: doc.data().newDescriptionDetail,
+    //                     });
+    //                 });
+
+    //                 setNews(newsList);
+    //             })
+    //             .catch((error) => {});
+    //     };
+    //     getNew();
+    // }, []);
+    const [data, setData] = useState([]);
+
+    const handleDelete = async (id) => {
+        try {
+            await deleteDoc(doc(db, 'news', id));
+            setData(data.filter((item) => item.id !== id));
+        } catch (err) {}
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let list = [];
+            try {
+                const QuerySnapshot = await getDocs(collection(db, 'news'));
+                QuerySnapshot.forEach((doc) => {
+                    list.push({ id: doc.id, ...doc.data() });
+                });
+                setData(list);
+            } catch (err) {}
+        };
+        fetchData();
+    }, []);
+    console.log(data);
+
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'name', headerName: 'Tên', width: 200 },
-        { field: 'img', headerName: 'Hình ảnh', width: 130 },
+        { field: 'newName', headerName: 'Tên bài viết', width: 200 },
         {
-            field: 'date',
-            headerName: 'Ngày đăng',
-            type: 'number',
+            field: 'newImg',
+            headerName: 'Hình ảnh',
             width: 130,
-            valueGetter: (params) => `${params.row.day || ''} ${params.row.month || ''} ${params.row.year || ''}`,
+            renderCell: (params) => (
+                <div>
+                    <Avatar sx={{ width: 50, height: 50 }} variant="square" src={params.row.newImg} alt="" />
+                </div>
+            ),
         },
-        { field: 'blog', headerName: 'Mô tả', width: 200 },
-        { field: 'why', headerName: 'Vấn đề', width: 200 },
-    ];
-    const rows = [
+
+        { field: 'newTime', headerName: 'Ngày đăng', type: 'number', width: 200 },
+        { field: 'newDescription', headerName: 'Mô tả', width: 250 },
+        { field: 'newDescriptionDetail', headerName: 'Mô tả chi tiết', width: 250 },
         {
-            id: 1,
-            name: 'Snow',
-            img: 'Jon',
-            blog: 'abc',
-            why: 'abc',
-            day: 1,
-            month: 1,
-            year: 2022,
-        },
-        {
-            id: 1,
-            name: 'Snow',
-            img: 'Jon',
-            blog: 'abc',
-            why: 'abc',
-            day: 1,
-            month: 1,
-            year: 2022,
+            field: 'actions',
+            type: 'actions',
+            width: 100,
+            getActions: (params) => [
+                <GridActionsCellItem
+                    fontSize="large"
+                    icon={<UploadIcon sx={{ fontSize: 20 }} color="success" />}
+                    label="Upload"
+                />,
+                <GridActionsCellItem
+                    onClick={() => handleDelete(params.row.id)}
+                    icon={<DeleteIcon sx={{ color: red[500], fontSize: 20 }} />}
+                    label="Delete"
+                />,
+            ],
         },
     ];
+
     return (
         <div style={{ height: 550, width: 1200, fontSize: 20 }}>
-            <DataGrid
-                style={{ fontSize: 20 }}
-                rows={rows}
-                columns={columns}
-                pageSize={8}
-                rowsPerPageOptions={[5]}
-                checkboxSelection
-            />
+            {data.length > 0 ? (
+                <DataGrid
+                    style={{ fontSize: 20 }}
+                    rows={data}
+                    columns={columns}
+                    pageSize={8}
+                    rowsPerPageOptions={[5]}
+                    checkboxSelection
+                    components={{ Toolbar: GridToolbar }}
+                    componentsProps={{
+                        toolbar: {
+                            showQuickFilter: true,
+                            quickFilterProps: { debounceMs: 500 },
+                        },
+                    }}
+                />
+            ) : null}
         </div>
     );
 }

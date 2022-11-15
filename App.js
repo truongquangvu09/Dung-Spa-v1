@@ -20,6 +20,7 @@ import NewsDetailContent from './components/MainLayoutNews/NewsList/NewsDetail/i
 import ViewPayCart from './components/MainLayoutShop/ViewPayCart';
 import Profiles from './pages/Profiles';
 import Admin from './pages/Admin/index';
+import SalesManagement from './components/MainLayoutAdmin/SalesManagement/index';
 function App() {
     return (
         <div>
@@ -31,7 +32,7 @@ function App() {
                         <Route path="/Introduce" element={<AboutPage />} />
                         <Route path="/Shop" element={<Shoppage />}>
                             <Route path="" element={<ProductListDetail />} />
-                            <Route path="Product_Detail" element={<ProductDetail />} />
+                            <Route path=":id" element={<ProductDetail />} />
                             <Route path="New_Detail" element={<NewDetail />} />
                         </Route>
                         <Route path="/Services" element={<ServicesPage />} />
@@ -41,10 +42,11 @@ function App() {
                         <Route path="ViewPayCart" element={<ViewPayCart />} />
                         <Route path="/News" element={<NewsPage />}>
                             <Route path="" element={<NewsListContent />} />
-                            <Route path="New_DetailContent" element={<NewsDetailContent />} />
+                            <Route path=":id" element={<NewsDetailContent />} />
                         </Route>
                         <Route path="/UserProfile" element={<Profiles />} />
                         <Route path="/Admin" element={<Admin />} />
+                        <Route path="/Sales" element={<SalesManagement />} />
                     </Route>
                 </Routes>
                 <Routes>

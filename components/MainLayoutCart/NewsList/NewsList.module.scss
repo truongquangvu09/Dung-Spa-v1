@@ -33,6 +33,10 @@ ul {
 .word-wrap {
     word-wrap: break-word;
 }
+.news-wrapper {
+    max-height: 480px;
+    overflow: hidden;
+}
 .news-item {
     .post {
         max-width: 264px;
